@@ -20,22 +20,20 @@
 	</head>
 	<body>
 
-        <div id="content">
-            <svg > <!--viewBox="0 0 1000 1000">--><!--width="1000" height="1000">-->
-            <defs></defs>
-              <g transform="translate(80, 200)"></g>
-			  <!-- <g></g> -->
-            </svg>
-        </div>
+        <div class="team-content"></div>
         <script>
-			if (window.visualViewport.width > 800){
+
+		const main_div = d3.select('.team-content').append('svg'),
+		defs = main_div.append('defs'),
+		svg_group = main_div.append('g').attr('class','svg-g').attr('transform',"translate(80, 200)");
+
+		if (window.innerWidth > 800){
 			d3.select('svg').attr('viewBox','0 0 1000 1000');
 			var center = 250, width = 400;
 		} else {
 			d3.select('svg').attr('viewBox','0 0 500 1500');
 			var center = 0, width = 1000;
 		}
-
 
 		var simulation = d3.forceSimulation()
 			.force('charge', d3.forceManyBody().strength(5))
@@ -84,7 +82,7 @@
 					.domain(fun)
 					.range(funColorScale)
 
-		const defs = d3.select("defs");
+		
 
 		// IMAGE
 		var logo_size = 250;
@@ -106,7 +104,7 @@
 				.attr('rx', 40/scl);
 
 
-			var head_group = d3.select('svg g')
+			var head_group = svg_group
 				.selectAll('.headshot')
 				.data(nodes)
 				.join('g')
