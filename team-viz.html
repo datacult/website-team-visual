@@ -167,7 +167,9 @@
 				.join('text')
 				.attr('class','title_top')
 				.attr('text-anchor','middle')
-				.style('font-size',9)
+				.style('font-family','Inter')
+				.style('font-size',8.5)
+				.style('font-weight',200)
 				.style('fill', d => textScale(data[d.id].Team))
 				.text(function(d) {
 				var txt, splt = data[d.id].Title.split(' ');
@@ -181,7 +183,9 @@
 				.join('text')
 				.attr('class','title_bottom')
 				.attr('text-anchor','middle')
-				.style('font-size',9)
+				.style('font-family','Inter')
+				.style('font-size',8.5)
+				.style('font-weight',200)
 				.style('fill', d => textScale(data[d.id].Team))
 				.text(function(d) {
 				var txt, splt = data[d.id].Title.split(' ');
@@ -195,7 +199,9 @@
 				.join('text')
 				.attr('class','pronouns')
 				.attr('text-anchor','middle')
+				.style('font-family','Inter')
 				.style('font-size',8)
+				.style('font-weight',300)
 				.style('fill', d => textScale(data[d.id].Team))
 				.text(function(d) {
 					return data[d.id].Pronouns.split('/')[0] + ' /';
@@ -207,7 +213,9 @@
 				.join('text')
 				.attr('class','pronouns_bottom')
 				.attr('text-anchor','middle')
+				.style('font-family','Inter')
 				.style('font-size',8)
+				.style('font-weight',300)
 				.style('fill', d => textScale(data[d.id].Team))
 				.text(function(d) {
 					return data[d.id].Pronouns.split('/')[1];
