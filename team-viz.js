@@ -4,7 +4,7 @@ const main_div = d3.select('.team-content-wrapper').append('svg'),
 
 		if (window.innerWidth > 1000){
 			d3.select('svg').attr('viewBox','0 0 600 1000');
-			var center = 100, width = 500;
+			var center = 50, width = 700;
 		} else {
 			d3.select('svg').attr('viewBox','0 0 550 1500');
 			var center = 0, width = 1000;
@@ -142,7 +142,7 @@ const main_div = d3.select('.team-content-wrapper').append('svg'),
 				.attr('text-anchor','middle')
 				.style('font-family','Inter')
 				.style('font-size',8.5)
-				.style('font-weight',200)
+				.style('font-weight',300)
 				.style('fill', d => textScale(data[d.id].Team))
 				.text(function(d) {
 				var txt, splt = data[d.id].Title.split(' ');
@@ -158,7 +158,7 @@ const main_div = d3.select('.team-content-wrapper').append('svg'),
 				.attr('text-anchor','middle')
 				.style('font-family','Inter')
 				.style('font-size',8.5)
-				.style('font-weight',200)
+				.style('font-weight',300)
 				.style('fill', d => textScale(data[d.id].Team))
 				.text(function(d) {
 				var txt, splt = data[d.id].Title.split(' ');
