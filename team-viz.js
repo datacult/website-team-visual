@@ -1,4 +1,4 @@
-const main_div = d3.select('.team-content-wrapper').append('svg'),
+const main_div = d3.select('.team-content').append('svg'),
 		defs = main_div.append('defs'),
 		svg_group = main_div.append('g').attr('class','svg-g').attr('transform',"translate(80, 200)");
 
