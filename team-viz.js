@@ -19,7 +19,7 @@ const main_div = d3.select('.team-content').append('svg'),
 			return 85;
 			}));
 
-		d3.csv("team-viz.csv").then(function(data) {
+		d3.csv("https://datacult.github.io/website-team-visual/team-viz.csv").then(function(data) {
 		var numNodes = data.length;
 		var nodes = d3.range(numNodes).map(function(d, i) {
 			return {
@@ -130,7 +130,7 @@ const main_div = d3.select('.team-content').append('svg'),
 				.join('image')
 				.attr("class",'professional_image')
 					.attr('href', function(d){
-						return 'headshots/'+data[d.id].Headshot;
+						return 'https://datacult.github.io/website-team-visual/headshots/'+data[d.id].Headshot;
 					})
 				
 
@@ -240,7 +240,7 @@ const main_div = d3.select('.team-content').append('svg'),
 			.attr("class",'personality_pic')
 			.attr("id",d => "personality_pic"+d.id)
 		.attr('href', function(d){
-							return 'personality/'+data[d.id].Personality;
+							return 'https://datacult.github.io/website-team-visual/personality/'+data[d.id].Personality;
 						})
 			.attr('display','none');
 
