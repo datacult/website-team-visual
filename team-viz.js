@@ -3,7 +3,7 @@ const main_div = d3.select('.team-content-wrapper').append('svg'),
 		svg_group = main_div.append('g').attr('class','svg-g').attr('transform',"translate(80, 200)");
 
 		if (window.innerWidth > 1000){
-			d3.select('svg').attr('viewBox','40 0 600 1000');
+			d3.select('svg').attr('viewBox','0 0 650 1000');
 			var center = 50, width = 500;
 		} else {
 			d3.select('svg').attr('viewBox','0 0 550 1500');
