@@ -1,37 +1,12 @@
-<!DOCTYPE html>
-<html>
-	<head>
-		<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/ >
-		<title>DC Team</title>
-
-		<!-- Google fonts -->
-		<link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet' type='text/css'>
-
-		<!-- D3.js -->
-		<script src="https://d3js.org/d3.v7.min.js"></script>
-
-		<style>
-
-            .hover_name, .hover_pronouns, .hover_title {
-                text-anchor: middle;
-            }
-		</style>
-	
-	</head>
-	<body>
-
-        <div class="team-content"></div>
-        <script>
-
-		const main_div = d3.select('.team-content').append('svg'),
+const main_div = d3.select('.team-content').append('svg'),
 		defs = main_div.append('defs'),
 		svg_group = main_div.append('g').attr('class','svg-g').attr('transform',"translate(80, 200)");
 
-		if (window.innerWidth > 800){
+		if (window.innerWidth > 1000){
 			d3.select('svg').attr('viewBox','0 0 1000 1000');
 			var center = 250, width = 400;
 		} else {
-			d3.select('svg').attr('viewBox','0 0 500 1500');
+			d3.select('svg').attr('viewBox','0 0 550 1500');
 			var center = 0, width = 1000;
 		}
 
@@ -366,8 +341,3 @@
 		}
 		
 		});
-		</script>
-		<!-- <script src="team-viz-new.js"></script> -->
-		<!-- <script src="https://raw.githubusercontent.com/AminaBrown/avalanche-viz/master/avy-viz.js"></script>	 -->
-	</body>
-</html>
