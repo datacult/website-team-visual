@@ -4,10 +4,10 @@ const main_div = d3.select('.team-content-wrapper').append('svg'),
 
 		if (window.innerWidth > 900){
 			d3.select('svg').attr('viewBox','0 0 800 1000');
-			var center = 100, width = 500;
+			var center = 100, width = 500, adjust = 0;
 		} else {
 			d3.select('svg').attr('viewBox','0 0 600 1500');
-			var center = 0, width = 1100;
+			var center = 0, width = 1100, adjust = 200;
 		}
 
 		var simulation = d3.forceSimulation()
@@ -24,7 +24,7 @@ const main_div = d3.select('.team-content-wrapper').append('svg'),
 		var nodes = d3.range(numNodes).map(function(d, i) {
 			return {
 				id: i,
-				role: Math.random()*width
+				role: Math.random()*width-adjust
 			}
 		});
 
