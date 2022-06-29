@@ -7,7 +7,7 @@ const main_div = d3.select('.team-content-wrapper').append('svg'),
 			var center = 100, width = 500, adjust = 0;
 		} else {
 			d3.select('svg').attr('viewBox','0 0 600 1500');
-			var center = 0, width = 1050, adjust = 150;
+			var center = 0, width = 1050, adjust = 100;
 		}
 
 		var simulation = d3.forceSimulation()
