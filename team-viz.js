@@ -2,9 +2,9 @@ const main_div = d3.select('.team-content-wrapper').append('svg'),
 		defs = main_div.append('defs'),
 		svg_group = main_div.append('g').attr('class','svg-g').attr('transform',"translate(80, 200)");
 
-		if (window.innerWidth > 1000){
+		if (window.innerWidth > 900){
 			d3.select('svg').attr('viewBox','0 0 800 1000');
-			var center = 100, width = 550;
+			var center = 100, width = 500;
 		} else {
 			d3.select('svg').attr('viewBox','0 0 550 1500');
 			var center = 0, width = 1000;
@@ -24,7 +24,7 @@ const main_div = d3.select('.team-content-wrapper').append('svg'),
 		var nodes = d3.range(numNodes).map(function(d, i) {
 			return {
 				id: i,
-			role: Math.random()*width
+				role: Math.random()*width
 			}
 		});
 
