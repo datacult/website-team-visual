@@ -93,7 +93,7 @@ const main_div = d3.select('.team-content-wrapper').append('svg'),
 				.attr('class','name')
 				.attr('text-anchor','middle')
 				.style('font-family','Inter')
-				.style('font-size',12)
+				.style('font-size','12px')
 				.style('font-weight','bold')
 				// .append('textPath')
 				// .attr('xlink:href',d=>'#rect'+d.id)
@@ -141,7 +141,7 @@ const main_div = d3.select('.team-content-wrapper').append('svg'),
 				.attr('class','title_top')
 				.attr('text-anchor','middle')
 				.style('font-family','Inter')
-				.style('font-size',8.5)
+				.style('font-size','8.5px')
 				.style('font-weight',300)
 				.style('fill', d => textScale(data[d.id].Team))
 				.text(function(d) {
@@ -157,7 +157,7 @@ const main_div = d3.select('.team-content-wrapper').append('svg'),
 				.attr('class','title_bottom')
 				.attr('text-anchor','middle')
 				.style('font-family','Inter')
-				.style('font-size',8.5)
+				.style('font-size','8.5px')
 				.style('font-weight',300)
 				.style('fill', d => textScale(data[d.id].Team))
 				.text(function(d) {
@@ -173,7 +173,7 @@ const main_div = d3.select('.team-content-wrapper').append('svg'),
 				.attr('class','pronouns')
 				.attr('text-anchor','middle')
 				.style('font-family','Inter')
-				.style('font-size',8)
+				.style('font-size','8px')
 				.style('font-weight',300)
 				.style('fill', d => textScale(data[d.id].Team))
 				.text(function(d) {
@@ -187,7 +187,7 @@ const main_div = d3.select('.team-content-wrapper').append('svg'),
 				.attr('class','pronouns_bottom')
 				.attr('text-anchor','middle')
 				.style('font-family','Inter')
-				.style('font-size',8)
+				.style('font-size','8px')
 				.style('font-weight',300)
 				.style('fill', d => textScale(data[d.id].Team))
 				.text(function(d) {
