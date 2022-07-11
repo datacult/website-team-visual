@@ -25,11 +25,12 @@ var countries = ['Canada','USA','Nigeria','Mexico','England','Germany','Brazil']
         .selectAll("path")
         .data(data.features)
         .join("path")
-            .attr("fill", "#f4f4f4")
+            .attr("fill", "#efefef")
             .attr("d", d3.geoPath()
             .projection(projection)
             )
-            .style("stroke", "#fff")
+            .style("stroke", "#fafafa")
+            .style('stroke-width',1.25)
             .style('opacity',.8)
             .attr('class', function(d) {
                 var txt;
