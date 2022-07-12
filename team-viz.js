@@ -110,7 +110,7 @@ const main_div = d3.select('.team-content-wrapper').append('svg').attr('class','
 				.attr("clip-path", d => "url(#logo-clip-" + d.id + ")");
 
 				head_group_rect
-					.selectAll('rect')
+					.selectAll('.background')
 					.data(d => [d])
 					.join('rect')
 					.attr('class','background')

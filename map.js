@@ -99,6 +99,7 @@ gradient.append('stop')
 
 var rect_size =  view == 'mobile' ? height/2: width/2.1;
 svg.append('rect')
+    .attr('class','rect-gradient')
     .attr('height',view == 'mobile' ? rect_size: height)
     .attr('width',view == 'mobile' ? width : rect_size)
     .attr('x',view == 'mobile' ? 0: width-rect_size)
