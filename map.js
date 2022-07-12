@@ -1,5 +1,5 @@
 // The svg
-const svg = d3.select(".team-content-wrapper").append('svg');
+const svg = d3.select(".map-content-wrapper").append('svg');
 
     if (window.outerWidth > 900){
         // var width = 1000, height = 325, d_width = width/2.75, d_height = height/1.4, scl = 2, view = 'desktop';
