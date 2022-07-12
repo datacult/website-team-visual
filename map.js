@@ -3,16 +3,16 @@ const svg = d3.select(".map-content-wrapper").append('svg').attr('class','map');
 
     if (window.outerWidth > 900){
         // var width = 1000, height = 325, d_width = width/2.75, d_height = height/1.4, scl = 2, view = 'desktop';
-        var width = 900, height = 300, d_width = width/2.4, d_height = height/1.4, scl = 1.85, view = 'desktop';
-        svg.attr('viewBox','0 0 '+width+' '+height);
+        var width_map = 900, height = 300, d_width = width_map/2.4, d_height = height/1.4, scl = 1.85, view = 'desktop';
+        svg.attr('viewBox','0 0 '+width_map+' '+height);
     } else {
-        var width = 300, height = 350, d_width = width/1.35, d_height = height/2.1, scl = 1, view = 'mobile';
-        svg.attr('viewBox','0 0 '+width+' '+height);
+        var width_map = 300, height = 350, d_width = width_map/1.35, d_height = height/2.1, scl = 1, view = 'mobile';
+        svg.attr('viewBox','0 0 '+width_map+' '+height);
     }
 
 // Map and projection
 const projection = d3.geoMercator()
-    .scale(width / scl / Math.PI)
+    .scale(width_map / scl / Math.PI)
     .translate([d_width, d_height])
 
 // Load external data and boot
@@ -97,17 +97,16 @@ gradient.append('stop')
 .attr('stop-color', '#FAFAFA')
 .attr('stop-opacity', 1);
 
-var rect_size =  view == 'mobile' ? height/2: width/2.1;
-console.log(rect_size)
+var rect_size =  view == 'mobile' ? height/2: width_map/2.1;
 svg.append('rect')
     .attr('class','rect-gradient')
     .attr('height',view == 'mobile' ? rect_size: height)
-    .attr('width',view == 'mobile' ? width : rect_size)
-    .attr('x',view == 'mobile' ? 0: width-rect_size)
+    .attr('width',view == 'mobile' ? width_map : rect_size)
+    .attr('x',view == 'mobile' ? 0: width_map-rect_size)
     .attr('y',view == 'mobile' ? height-rect_size : 0)
     .attr('fill','url(#svgGradient)');
     
-var txt_x = view == 'mobile' ? 20:width-rect_size+50
+var txt_x = view == 'mobile' ? 20:width_map-rect_size+50
 
 var txt = svg.append('text')
         .attr('x', txt_x)
