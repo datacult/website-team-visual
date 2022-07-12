@@ -1,12 +1,12 @@
-const main_div = d3.select('.team-content-wrapper').append('svg'),
+const main_div = d3.select('.team-content-wrapper').append('svg').attr('class','team'),
 		defs = main_div.append('defs'),
 		svg_group = main_div.append('g').attr('class','svg-g').attr('transform',"translate(80, 200)");
 
 		if (window.outerWidth > 900){
-			d3.select('svg').attr('viewBox','0 0 800 1000');
+			d3.select('.team').attr('viewBox','0 0 800 1000');
 			var center = 100, width = 500, adjust = 0;
 		} else {
-			d3.select('svg').attr('viewBox','0 0 600 1500');
+			d3.select('.team').attr('viewBox','0 0 600 1500');
 			var center = 0, width = 1050, adjust = 100;
 		}
 

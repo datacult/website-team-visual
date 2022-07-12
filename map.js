@@ -1,5 +1,5 @@
 // The svg
-const svg = d3.select(".map-content-wrapper").append('svg');
+const svg = d3.select(".map-content-wrapper").append('svg').attr('class','map');
 
     if (window.outerWidth > 900){
         // var width = 1000, height = 325, d_width = width/2.75, d_height = height/1.4, scl = 2, view = 'desktop';
@@ -22,9 +22,10 @@ d3.json("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/w
 var countries = ['Canada','USA','Nigeria','Mexico','England','Germany','Brazil']
     // Draw the map
     svg.append("g")
-        .selectAll("path")
+        .selectAll(".country")
         .data(data.features)
         .join("path")
+            .attr('class','country')
             .attr("fill", "#efefef")
             .attr("d", d3.geoPath()
             .projection(projection)
@@ -32,18 +33,18 @@ var countries = ['Canada','USA','Nigeria','Mexico','England','Germany','Brazil']
             .style("stroke", "#fafafa")
             .style('stroke-width',1.25)
             .style('opacity',.8)
-            .attr('class', function(d) {
+            .attr('id', function(d) {
                 var txt;
 				countries.includes(d.properties.name)  ? txt = 'hover': txt = 'still';
 				return txt
 				})
 
     let mouseOver = function(d) {
-        d3.selectAll(".hover")
+        d3.selectAll("#hover")
             .transition()
             .duration(200)
             .style("opacity", .5)
-        d3.selectAll(".still")
+        d3.selectAll("#still")
             .transition()
             .duration(200)
             .style("opacity", .5)
@@ -54,11 +55,11 @@ var countries = ['Canada','USA','Nigeria','Mexico','England','Germany','Brazil']
         }
     
     let mouseLeave = function(d) {
-        d3.selectAll(".hover")
+        d3.selectAll("#hover")
             .transition()
             .duration(200)
             .style("opacity", .8)
-        d3.selectAll(".still")
+        d3.selectAll("#still")
             .transition()
             .duration(200)
             .style("opacity", .8)
@@ -68,7 +69,7 @@ var countries = ['Canada','USA','Nigeria','Mexico','England','Germany','Brazil']
             .style("opacity", .8)
         }
 
-    svg.selectAll('.hover').attr("fill","#99B0F9")
+    svg.selectAll('#hover').attr("fill","#99B0F9")
     .on("mouseover", mouseOver )
     .on("mouseleave", mouseLeave );
 
