@@ -98,6 +98,7 @@ gradient.append('stop')
 .attr('stop-opacity', 1);
 
 var rect_size =  view == 'mobile' ? height/2: width/2.1;
+console.log(rect_size)
 svg.append('rect')
     .attr('class','rect-gradient')
     .attr('height',view == 'mobile' ? rect_size: height)
