@@ -69,7 +69,7 @@ var countries = ['Canada','USA','Nigeria','Mexico','England','Germany','Brazil']
             .style("opacity", .8)
         }
 
-    svg.selectAll('#hover').attr("fill","#99B0F9")
+    svg.selectAll('#hover').attr("fill",'#EF7BA0')
     .on("mouseover", mouseOver )
     .on("mouseleave", mouseLeave );
 
