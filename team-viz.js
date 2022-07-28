@@ -146,7 +146,8 @@ const main_div = d3.select('.team-content-wrapper').append('svg').attr('class','
 				.style('fill', d => textScale(data[d.id].Team))
 				.text(function(d) {
 				var txt, splt = data[d.id].Title.split(' ');
-				splt.length >= 4 ? txt = splt[0]+' '+splt[1]: txt=data[d.id].Title;
+				// splt.length >= 4 ? txt = splt[0]+' '+splt[1]: txt=data[d.id].Title;
+				splt.length >= 6 ? txt = splt[0]+' '+splt[1]+' '+splt[2] : (splt.length >= 4 ? txt = splt[0]+' '+splt[1]: txt=data[d.id].Title);
 				return txt
 				}); 
 
@@ -162,7 +163,7 @@ const main_div = d3.select('.team-content-wrapper').append('svg').attr('class','
 				.style('fill', d => textScale(data[d.id].Team))
 				.text(function(d) {
 				var txt, splt = data[d.id].Title.split(' ');
-				splt.length >= 4 ? txt = splt[2]+' '+splt[3]: txt='';
+				splt.length >= 6 ? txt = splt[3]+' '+splt[4]+' '+splt[5] : (splt.length >= 4 ? txt = splt[2]+' '+splt[3]: txt='');
 				return txt
 				}); 
 
