@@ -3,7 +3,7 @@ const main_div = d3.select('.team-content-wrapper').append('svg').attr('class','
 		svg_group = main_div.append('g').attr('class','svg-g').attr('transform',"translate(80, 200)");
 
 		if (window.outerWidth > 900){
-			d3.select('.team').attr('viewBox','0 0 800 1000');
+			d3.select('.team').attr('viewBox','0 0 850 1000');
 			var center = 100, width = 500, adjust = 0;
 		} else {
 			d3.select('.team').attr('viewBox','0 0 600 1500');
@@ -147,7 +147,7 @@ const main_div = d3.select('.team-content-wrapper').append('svg').attr('class','
 				.text(function(d) {
 				var txt, splt = data[d.id].Title.split(' ');
 				// splt.length >= 4 ? txt = splt[0]+' '+splt[1]: txt=data[d.id].Title;
-				splt.length >= 6 ? txt = splt[0]+' '+splt[1]+' '+splt[2] : (splt.length >= 4 ? txt = splt[0]+' '+splt[1]: txt=data[d.id].Title);
+				splt.length >= 6 ? txt = splt[0]+' '+splt[1]+' '+splt[2] : (splt.length == 5 ? txt = splt[0]+' '+splt[1]+' '+splt[2] : (splt.length == 4 ? txt = splt[0]+' '+splt[1]: txt=data[d.id].Title));
 				return txt
 				}); 
 
@@ -163,7 +163,7 @@ const main_div = d3.select('.team-content-wrapper').append('svg').attr('class','
 				.style('fill', d => textScale(data[d.id].Team))
 				.text(function(d) {
 				var txt, splt = data[d.id].Title.split(' ');
-				splt.length >= 6 ? txt = splt[3]+' '+splt[4]+' '+splt[5] : (splt.length >= 4 ? txt = splt[2]+' '+splt[3]: txt='');
+				splt.length >= 6 ? txt = splt[3]+' '+splt[4]+' '+splt[5] : (splt.length == 5 ? txt = splt[3]+' '+splt[4] : (splt.length == 4 ? txt = splt[2]+' '+splt[3]: txt=''));
 				return txt
 				}); 
 
