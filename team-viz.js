@@ -51,8 +51,8 @@ const main_div = d3.select('.team-content-wrapper').append('svg').attr('class','
 					.domain(industry)
 					.range(indShape)
 
-		var funColorScale = ['#B06BEC','#0044D8','#FF975C','#D72F74'];
-		var fun = ['Coffee','Tea','OJ','Custard']
+		var funColorScale = ['#B06BEC','#0044D8','#FF975C','#D72F74','#05B2DC'];
+		var fun = ['Coffee','Tea','OJ','Custard','Water']
 		var funScale = d3.scaleOrdinal()
 					.domain(fun)
 					.range(funColorScale)
