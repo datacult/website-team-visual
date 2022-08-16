@@ -4,7 +4,7 @@ const main_div = d3.select('.team-content-wrapper').append('svg').attr('class','
 
 		if (window.outerWidth > 900){
 			d3.select('.team').attr('viewBox','0 0 850 1000');
-			var center = 100, width = 500, adjust = 0;
+			var center = 125, width = 500, adjust = 0;
 		} else {
 			d3.select('.team').attr('viewBox','0 0 600 1500');
 			var center = 0, width = 1050, adjust = 100;
