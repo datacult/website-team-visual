@@ -23,12 +23,38 @@ const main_div = d3.select('.team-content-wrapper').append('svg').attr('class','
 		var numNodes = data.length;
 		var nodes = d3.range(numNodes).map(function(d, i) {
 			return {
-				id: i,
+				id: data[i].Name,
 				role: Math.random()*width-adjust
 			}
 		});
 
-		simulation.nodes(nodes).force('y', d3.forceY().y(function(d) {
+		var links = [
+            { "source": "Gabi Steele", "target": "Leah Weiss", "value": 1 },
+            { "source": "Leah Weiss", "target": "Mikaela Ergas-Lenett", "value": 1 },
+            { "source": "Mikaela Ergas-Lenett", "target": "Marisa Ruiz Asari", "value": 1 },
+            { "source": "Marisa Ruiz Asari", "target": "Michael Weinberg", "value": 1 },
+            { "source": "Michael Weinberg", "target": "Neil Oliver", "value": 1 },
+            { "source": "Neil Oliver", "target": "Rhys Berkwitt", "value": 1 },
+            { "source": "Rhys Berkwitt", "target": "Bruno Vendruscolo", "value": 1 },
+            { "source": "Bruno Vendruscolo", "target": "Samantha Lohier", "value": 1 },
+            { "source": "Samantha Lohier", "target": "Opeyemi Fabiyi", "value": 1 },
+            { "source": "Opeyemi Fabiyi", "target": "Amina Brown", "value": 1 },
+            { "source": "Amina Brown", "target": "Demilade Agboola", "value": 1 },
+            { "source": "Demilade Agboola", "target": "Fernando Reyes", "value": 1 },
+            { "source": "Fernando Reyes", "target": "Ku Adofo-Mensah", "value": 1 },
+            { "source": "Ku Adofo-Mensah", "target": "Caroline Fitzgerald", "value": 1 },
+            { "source": "Caroline Fitzgerald", "target": "Meaghan Barry", "value": 1 },
+            { "source": "Meaghan Barry", "target": "Ilana Sussman", "value": 1 },
+            { "source": "Ilana Sussman", "target": "Brian Pei", "value": 1 },
+            { "source": "Brian Pei", "target": "Angel Catalan", "value": 1 },
+            { "source": "Angel Catalan", "target": "Sopuruchi Ndubuisi", "value": 1 },
+            { "source": "Sopuruchi Ndubuisi", "target": "Felix Buchholz", "value": 1 },
+            { "source": "Felix Buchholz", "target": "Grant Wilburn", "value": 1 },
+        ]
+
+		simulation.nodes(nodes)
+        .force("link", d3.forceLink(links).id(d => d.id).distance(10))
+		.force('y', d3.forceY().y(function(d) {
 		return d.role;
 		}))
 
