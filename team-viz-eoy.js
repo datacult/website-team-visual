@@ -138,27 +138,7 @@ const main_div = d3.select('.team-content-wrapper').append('svg').attr('class','
 				return teamScale(data[d.id].Team);
 				});
 
-				head_group_rect
-				.selectAll('.personality_pic')
-				.data(d => [d])
-				.join('image')
-				.attr("class",'personality_pic')
-				.attr("id",d => "personality_pic"+d.id)
-			.attr('href', function(d){
-								return 'https://datacult.github.io/website-team-visual/celebration/'+data[d.id].Personality;
-							})
-				.attr('display','none');
-
 				
-			
-			head_group_rect
-				.selectAll('.professional_image')
-				.data(d => [d])
-				.join('image')
-				.attr("class",'professional_image')
-					.attr('href', function(d){
-						return 'https://datacult.github.io/website-team-visual/headshots/'+data[d.id].Headshot;
-					})
 				
 
 			head_group_rect
@@ -260,6 +240,28 @@ const main_div = d3.select('.team-content-wrapper').append('svg').attr('class','
 				return timeScale(data[d.id].Timezone)==i?'black':'white'});
 				
 			})
+
+			head_group_rect
+			.selectAll('.personality_pic')
+			.data(d => [d])
+			.join('image')
+			.attr("class",'personality_pic')
+			.attr("id",d => "personality_pic"+d.id)
+		.attr('href', function(d){
+							return 'https://datacult.github.io/website-team-visual/celebration/'+data[d.id].Personality;
+						})
+			.attr('display','none');
+
+			
+		
+		head_group_rect
+			.selectAll('.professional_image')
+			.data(d => [d])
+			.join('image')
+			.attr("class",'professional_image')
+				.attr('href', function(d){
+					return 'https://datacult.github.io/website-team-visual/headshots/'+data[d.id].Headshot;
+				})
 
 		// 	head_group_rect
 		// 	.selectAll('.personality_pic')
