@@ -23,7 +23,8 @@ const main_div = d3.select('.team-content-wrapper').append('svg').attr('class','
 		var numNodes = data.length;
 		var nodes = d3.range(numNodes).map(function(d, i) {
 			return {
-				id: data[i].Name,
+				id: i,
+				name: data[i].Name,
 				role: Math.random()*width-adjust
 			}
 		});
@@ -42,8 +43,8 @@ const main_div = d3.select('.team-content-wrapper').append('svg').attr('class','
             { "source": "Amina Brown", "target": "Demilade Agboola", "value": 1 },
             { "source": "Demilade Agboola", "target": "Fernando Reyes", "value": 1 },
             { "source": "Fernando Reyes", "target": "Ku Adofo-Mensah", "value": 1 },
-            { "source": "Ku Adofo-Mensah", "target": "Caroline Fitzgerald", "value": 1 },
-            { "source": "Caroline Fitzgerald", "target": "Meaghan Barry", "value": 1 },
+            { "source": "Ku Adofo-Mensah", "target": "Caroline FitzGerald", "value": 1 },
+            { "source": "Caroline FitzGerald", "target": "Meaghan Barry", "value": 1 },
             { "source": "Meaghan Barry", "target": "Ilana Sussman", "value": 1 },
             { "source": "Ilana Sussman", "target": "Brian Pei", "value": 1 },
             { "source": "Brian Pei", "target": "Angel Catalan", "value": 1 },
@@ -53,21 +54,21 @@ const main_div = d3.select('.team-content-wrapper').append('svg').attr('class','
         ]
 
 		simulation.nodes(nodes)
-        .force("link", d3.forceLink(links).id(d => d.id).distance(10))
+        .force("link", d3.forceLink(links).id(d => data[d.id].Name).distance(10))
 		.force('y', d3.forceY().y(function(d) {
 		return d.role;
 		}))
 
-		const link = svg.append("g")
-        .attr("stroke", "#504E4E")
-        .attr("stroke-opacity", 0.6)
+		const link = svg_group.append("g")
+        .attr("stroke", "#EA3580")
+        .attr("stroke-opacity", 2)
         .selectAll("line")
         .data(links)
         .join("line")
         .attr("stroke-width", d => Math.sqrt(d.value))
 
-		var colorScale = ['#2E6DF6','#FBAF84', '#EA3580'];
-		var colorText = ['#FFFFFF','#000000', '#FFFFFF'];
+		var colorScale = ['#F4DEE4','#FBAF84', '#EA3580'];
+		var colorText = ['#000000','#000000', '#000000'];
 		var team = ['Member','Collaborator','New']
 		var teamScale = d3.scaleOrdinal()
 					.domain(team)
@@ -144,7 +145,7 @@ const main_div = d3.select('.team-content-wrapper').append('svg').attr('class','
 					return data[d.id].Name;
 				}); 
 
-				console.log(data)
+				// console.log(data)
 
 			var head_group_rect = head_group
 				.selectAll('.link')
@@ -282,7 +283,8 @@ const main_div = d3.select('.team-content-wrapper').append('svg').attr('class','
 			.attr("class",'personality_pic')
 			.attr("id",d => "personality_pic"+d.id)
 		.attr('href', function(d){
-							return 'https://datacult.github.io/website-team-visual/celebration/'+data[d.id].Personality;
+							// return 'https://datacult.github.io/website-team-visual/celebration/'+data[d.id].Personality;
+							return 'https://datacult.github.io/website-team-visual/celebration/Confetti.png';
 						})
 			.attr('display','none');
 
@@ -323,16 +325,15 @@ const main_div = d3.select('.team-content-wrapper').append('svg').attr('class','
 
 			simulation
 			.nodes(nodes)
-			.links(links)
 			.on('tick', ticked);
 
 		function ticked() {
 		
 		link
-            .attr("x1", d => d.source.x)
-            .attr("y1", d => d.source.y)
-            .attr("x2", d => d.target.x)
-            .attr("y2", d => d.target.y)
+            .attr("x1", d => d.source.x+200)
+            .attr("y1", d => d.source.y+50)
+            .attr("x2", d => d.target.x+200)
+            .attr("y2", d => d.target.y+50)
 
 		head_group
 				.attr("x", function(d) { return d.x; })
