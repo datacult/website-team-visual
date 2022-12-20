@@ -58,6 +58,14 @@ const main_div = d3.select('.team-content-wrapper').append('svg').attr('class','
 		return d.role;
 		}))
 
+		const link = svg.append("g")
+        .attr("stroke", "#504E4E")
+        .attr("stroke-opacity", 0.6)
+        .selectAll("line")
+        .data(links)
+        .join("line")
+        .attr("stroke-width", d => Math.sqrt(d.value))
+
 		var colorScale = ['#2E6DF6','#FBAF84', '#EA3580'];
 		var colorText = ['#FFFFFF','#000000', '#FFFFFF'];
 		var team = ['Member','Collaborator','New']
@@ -315,11 +323,16 @@ const main_div = d3.select('.team-content-wrapper').append('svg').attr('class','
 
 			simulation
 			.nodes(nodes)
+			.links(links)
 			.on('tick', ticked);
 
 		function ticked() {
 		
-		
+		link
+            .attr("x1", d => d.source.x)
+            .attr("y1", d => d.source.y)
+            .attr("x2", d => d.target.x)
+            .attr("y2", d => d.target.y)
 
 		head_group
 				.attr("x", function(d) { return d.x; })
