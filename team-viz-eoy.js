@@ -3,8 +3,8 @@ const main_div = d3.select('.team-content-wrapper').append('svg').attr('class','
 		svg_group = main_div.append('g').attr('class','svg-g').attr('transform',"translate(80, 200)");
 
 		if (window.outerWidth > 900){
-			d3.select('.team').attr('viewBox','0 0 850 1000');
-			var center = 125, width = 500, adjust = 0;
+			d3.select('.team').attr('viewBox','0 0 950 1100');
+			var center = 175, width = 500, adjust = -25;
 		} else {
 			d3.select('.team').attr('viewBox','0 0 600 1500');
 			var center = 0, width = 1050, adjust = 100;
