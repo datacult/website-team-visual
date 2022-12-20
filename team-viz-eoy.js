@@ -51,11 +51,11 @@ const main_div = d3.select('.team-content-wrapper').append('svg').attr('class','
 					.domain(industry)
 					.range(indShape)
 
-		var funColorScale = ['#B06BEC','#0044D8','#FF975C','#D72F74','#05B2DC'];
-		var fun = ['Coffee','Tea','OJ','Custard','Water']
-		var funScale = d3.scaleOrdinal()
-					.domain(fun)
-					.range(funColorScale)
+		// var funColorScale = ['#B06BEC','#0044D8','#FF975C','#D72F74','#05B2DC'];
+		// var fun = ['Coffee','Tea','OJ','Custard','Water']
+		// var funScale = d3.scaleOrdinal()
+		// 			.domain(fun)
+		// 			.range(funColorScale)
 
 		
 
@@ -86,6 +86,15 @@ const main_div = d3.select('.team-content-wrapper').append('svg').attr('class','
 				.attr("class","headshot")
 				.attr("id",d => "headshot"+d.id)
 
+			// head_group
+			// 	.selectAll('.link')
+			// 	.data(d => [d])
+			// 	.join('a')
+			// 	.attr('class','link')
+			// 	// .attr('href',d=>d.Link)
+			// 	.attr('href','www.google.com')
+			// 	.attr('target','_blank')
+
 			head_group
 				.selectAll('.name')
 				.data(d => [d])
@@ -101,9 +110,16 @@ const main_div = d3.select('.team-content-wrapper').append('svg').attr('class','
 					return data[d.id].Name;
 				}); 
 
+				console.log(data)
+
 			var head_group_rect = head_group
-				.selectAll('.headshot_rect')
-				.data(d=>[d])
+				.selectAll('.link')
+				.data(d => [d])
+				.join('a')
+				.attr('class','link')
+				.attr('href',d => (data[d.id].Link != '') ? data[d.id].Link : 'javascript:void(0)')
+				.attr('target',d => (data[d.id].Link != '') ? '_blank' : '_self')
+				.style('cursor',d => (data[d.id].Link != '') ? 'pointer' : 'default')
 				.join('g')
 				.attr('class','headshot_rect')
 				.attr("id",d => "headshot_rect"+d.id)
@@ -121,6 +137,17 @@ const main_div = d3.select('.team-content-wrapper').append('svg').attr('class','
 					.attr('fill', function(d) {
 				return teamScale(data[d.id].Team);
 				});
+
+				head_group_rect
+				.selectAll('.personality_pic')
+				.data(d => [d])
+				.join('image')
+				.attr("class",'personality_pic')
+				.attr("id",d => "personality_pic"+d.id)
+			.attr('href', function(d){
+								return 'https://datacult.github.io/website-team-visual/celebration/'+data[d.id].Personality;
+							})
+				.attr('display','none');
 
 				
 			
@@ -234,16 +261,16 @@ const main_div = d3.select('.team-content-wrapper').append('svg').attr('class','
 				
 			})
 
-			head_group_rect
-			.selectAll('.personality_pic')
-			.data(d => [d])
-			.join('image')
-			.attr("class",'personality_pic')
-			.attr("id",d => "personality_pic"+d.id)
-		.attr('href', function(d){
-							return 'https://datacult.github.io/website-team-visual/personality/'+data[d.id].Personality;
-						})
-			.attr('display','none');
+		// 	head_group_rect
+		// 	.selectAll('.personality_pic')
+		// 	.data(d => [d])
+		// 	.join('image')
+		// 	.attr("class",'personality_pic')
+		// 	.attr("id",d => "personality_pic"+d.id)
+		// .attr('href', function(d){
+		// 					return 'https://datacult.github.io/website-team-visual/personality/'+data[d.id].Personality;
+		// 				})
+		// 	.attr('display','none');
 
 			head_group
 			.style('pointer-events','all')
