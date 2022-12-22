@@ -2,14 +2,17 @@ const main_div = d3.select('.team-content-wrapper').append('svg').attr('class','
 		defs = main_div.append('defs'),
 		svg_group = main_div.append('g').attr('class','svg-g').attr('transform',"translate(80, 200)");
 
+		//resize for mobile vs desktop
 		if (window.outerWidth > 900){
 			d3.select('.team').attr('viewBox','0 0 950 1100');
+			//use these variables to reposition within the viewBox
 			var center = 175, width = 500, adjust = -25;
 		} else {
 			d3.select('.team').attr('viewBox','0 0 600 1500');
 			var center = 0, width = 1050, adjust = 100;
 		}
 
+		//build force simulation
 		var simulation = d3.forceSimulation()
 			.force('charge', d3.forceManyBody().strength(5))
 			.force('x', d3.forceX().x(function(d) {
@@ -19,17 +22,21 @@ const main_div = d3.select('.team-content-wrapper').append('svg').attr('class','
 			return 85;
 			}));
 
+		//load csv
 		d3.csv("https://datacult.github.io/website-team-visual/team-viz-eoy.csv").then(function(data) {
+
+		//build node object (this is the data that actually interacts with the simulation)
 		var numNodes = data.length;
 		var nodes = d3.range(numNodes).map(function(d, i) {
 			return {
 				id: i,
 				name: data[i].Name,
+				//role is actually randomly assigning positions so the nodes get repositioned everytime
 				role: Math.random()*width-adjust
 			}
 		});
 
-		
+		//create links data to connect/control order of nodes via pink lines
 		var links = [
             { "source": "Leah Weiss", "target": "Gabi Steele", "value": 1 },
             { "source": "Gabi Steele", "target": "Mikaela Ergas-Lenett", "value": 1 },
@@ -55,12 +62,14 @@ const main_div = d3.select('.team-content-wrapper').append('svg').attr('class','
             { "source": "Felix Buchholz", "target": "Grant Wilburn", "value": 1 },
         ]
 
+		//call force simulation
 		simulation.nodes(nodes)
         .force("link", d3.forceLink(links).id(d => data[d.id].Name).distance(10))
 		.force('y', d3.forceY().y(function(d) {
 		return d.role;
 		}))
 
+		//draw pink lines
 		const link = svg_group.append("g")
         .selectAll(".link-line")
         .data(links)
@@ -70,6 +79,7 @@ const main_div = d3.select('.team-content-wrapper').append('svg').attr('class','
         .attr("stroke", "#EA3580")
         .attr("stroke-opacity", .3)
 
+		//build scales to control background and font colors, and icon shape
 		var colorScale = ['#F4DEE4','#FBAF84', '#EA3580'];
 		var colorText = ['#000000','#000000', '#000000'];
 		var team = ['Member','Collaborator','New']
@@ -89,19 +99,14 @@ const main_div = d3.select('.team-content-wrapper').append('svg').attr('class','
 					.domain(industry)
 					.range(indShape)
 
-		// var funColorScale = ['#B06BEC','#0044D8','#FF975C','#D72F74','#05B2DC'];
-		// var fun = ['Coffee','Tea','OJ','Custard','Water']
-		// var funScale = d3.scaleOrdinal()
-		// 			.domain(fun)
-		// 			.range(funColorScale)
-
-		
 
 		// IMAGE
 		var logo_size = 250;
 
+		//variable to control positioning within each node
 		var scl = 1.4, group_width = 165/scl, group_height = 170/scl;
 
+		//create mask over the whole rectangle
 		var mask =  defs
 				.selectAll(".logo-clip")
 				.data(nodes)
@@ -117,6 +122,7 @@ const main_div = d3.select('.team-content-wrapper').append('svg').attr('class','
 				.attr('rx', 40/scl);
 
 
+			//build group for all elements
 			var head_group = svg_group
 				.selectAll('.headshot')
 				.data(nodes)
@@ -124,15 +130,7 @@ const main_div = d3.select('.team-content-wrapper').append('svg').attr('class','
 				.attr("class","headshot")
 				.attr("id",d => "headshot"+d.id)
 
-			// head_group
-			// 	.selectAll('.link')
-			// 	.data(d => [d])
-			// 	.join('a')
-			// 	.attr('class','link')
-			// 	// .attr('href',d=>d.Link)
-			// 	.attr('href','www.google.com')
-			// 	.attr('target','_blank')
-
+			//draw names above rect
 			head_group
 				.selectAll('.name')
 				.data(d => [d])
@@ -142,14 +140,11 @@ const main_div = d3.select('.team-content-wrapper').append('svg').attr('class','
 				.style('font-family','Inter')
 				.style('font-size','12px')
 				.style('font-weight','bold')
-				// .append('textPath')
-				// .attr('xlink:href',d=>'#rect'+d.id)
 				.text(function(d) {
 					return data[d.id].Name;
 				}); 
 
-				// console.log(data)
-
+			//build group for all elements seen prior to hover (with anchor tag for links)
 			var head_group_rect = head_group
 				.selectAll('.link')
 				.data(d => [d])
@@ -163,6 +158,7 @@ const main_div = d3.select('.team-content-wrapper').append('svg').attr('class','
 				.attr("id",d => "headshot_rect"+d.id)
 				.attr("clip-path", d => "url(#logo-clip-" + d.id + ")");
 
+				//add background color
 				head_group_rect
 					.selectAll('.background')
 					.data(d => [d])
@@ -179,6 +175,7 @@ const main_div = d3.select('.team-content-wrapper').append('svg').attr('class','
 				
 				
 
+			//draw job title - top line for those wrapping, full title for those on one line
 			head_group_rect
 				.selectAll('.title_top')
 				.data(d => [d])
@@ -191,11 +188,12 @@ const main_div = d3.select('.team-content-wrapper').append('svg').attr('class','
 				.style('fill', d => textScale(data[d.id].Team))
 				.text(function(d) {
 				var txt, splt = data[d.id].Title.split(' ');
-				// splt.length >= 4 ? txt = splt[0]+' '+splt[1]: txt=data[d.id].Title;
+				// if statements to check whether the title needs to be split onto two lines
 				splt.length >= 6 ? txt = splt[0]+' '+splt[1]+' '+splt[2] : (splt.length == 5 ? txt = splt[0]+' '+splt[1]+' '+splt[2] : (splt.length == 4 ? txt = splt[0]+' '+splt[1]: txt=data[d.id].Title));
 				return txt
 				}); 
 
+			//draw second line for titles needing it
 			head_group_rect
 				.selectAll('.title_bottom')
 				.data(d => [d])
@@ -212,6 +210,7 @@ const main_div = d3.select('.team-content-wrapper').append('svg').attr('class','
 				return txt
 				}); 
 
+			//add first line of pronouns
 			head_group_rect
 				.selectAll('.pronouns')
 				.data(d => [d])
@@ -226,6 +225,7 @@ const main_div = d3.select('.team-content-wrapper').append('svg').attr('class','
 					return data[d.id].Pronouns.split('/')[0] + ' /';
 				}); 
 
+			//add second line of pronouns
 			head_group_rect
 				.selectAll('.pronouns_bottom')
 				.data(d => [d])
@@ -240,14 +240,7 @@ const main_div = d3.select('.team-content-wrapper').append('svg').attr('class','
 					return data[d.id].Pronouns.split('/')[1];
 				}); 
 
-			// head_group_rect
-			// 	.selectAll('.lil_circle')
-			// 	.data(d => [d])
-			// 	.join('circle')
-			// 	.attr('class','lil_circle')
-			// 	.attr('r', 10)
-			// 	.attr('fill', 'white');
-
+			//add icon
 			head_group_rect
 				.selectAll('.industry_path')
 				.data(d => [d])
@@ -257,16 +250,15 @@ const main_div = d3.select('.team-content-wrapper').append('svg').attr('class','
 				.attr('d',  function(d) {
 				return industryScale(data[d.id].Industry);
 				})
-				// .attr('fill', function(d) {
-				// return funScale(data[d.id].Morning);
-				// })
 
+			//build variables and scales for time zone lines
 			var time = [0,1,2,3,4,5,6,7,8,9]
 
 			var timeScale = d3.scaleOrdinal()
 					.domain(['1','0','-1','-2','-3','-4','-5','-6','-7','-8'])
 					.range(time)
 
+			//add time zone lines
 			time.forEach( function(i){
 			head_group_rect
 				.selectAll('#line_tz'+i)
@@ -279,20 +271,18 @@ const main_div = d3.select('.team-content-wrapper').append('svg').attr('class','
 				
 			})
 
+			//add background photo
 			head_group_rect
 			.selectAll('.personality_pic')
 			.data(d => [d])
 			.join('image')
 			.attr("class",'personality_pic')
 			.attr("id",d => "personality_pic"+d.id)
-		.attr('href', function(d){
-							// return 'https://datacult.github.io/website-team-visual/celebration/'+data[d.id].Personality;
-							return 'https://datacult.github.io/website-team-visual/celebration/Confetti.png';
-						})
+			.attr('href', 'https://datacult.github.io/website-team-visual/celebration/Confetti.png')
 			.attr('display','none');
 
 			
-		
+		//add headshot
 		head_group_rect
 			.selectAll('.professional_image')
 			.data(d => [d])
@@ -302,17 +292,7 @@ const main_div = d3.select('.team-content-wrapper').append('svg').attr('class','
 					return 'https://datacult.github.io/website-team-visual/headshots/'+data[d.id].Headshot;
 				})
 
-		// 	head_group_rect
-		// 	.selectAll('.personality_pic')
-		// 	.data(d => [d])
-		// 	.join('image')
-		// 	.attr("class",'personality_pic')
-		// 	.attr("id",d => "personality_pic"+d.id)
-		// .attr('href', function(d){
-		// 					return 'https://datacult.github.io/website-team-visual/personality/'+data[d.id].Personality;
-		// 				})
-		// 	.attr('display','none');
-
+			//add background hover event
 			head_group
 			.style('pointer-events','all')
 			.on("mouseover", function() {
@@ -326,10 +306,12 @@ const main_div = d3.select('.team-content-wrapper').append('svg').attr('class','
 				head_group.select(ppic).attr('display','none');
 			}); 
 
+			//run simulation
 			simulation
 			.nodes(nodes)
 			.on('tick', ticked);
 
+		//simulation function to control positioning
 		function ticked() {
 		
 		link
@@ -381,11 +363,6 @@ const main_div = d3.select('.team-content-wrapper').append('svg').attr('class','
 				.selectAll('.pronouns_bottom')
 					.attr('x', d => d.x+150+group_width/1.2)
 				.attr('y', d => d.y+20+group_height/3.5+3)
-
-		// head_group
-		// 		.selectAll('.lil_circle')
-		// 			.attr('cx', d => d.x+150+group_width/1.2)
-		// 		.attr('cy', d => d.y+20+group_height/2.1)
 
 		head_group
 				.selectAll('.industry_path')
