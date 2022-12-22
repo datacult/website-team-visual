@@ -30,11 +30,12 @@ const main_div = d3.select('.team-content-wrapper').append('svg').attr('class','
 		});
 
 		var links = [
-            { "source": "Gabi Steele", "target": "Leah Weiss", "value": 1 },
-            { "source": "Leah Weiss", "target": "Mikaela Ergas-Lenett", "value": 1 },
+            { "source": "Leah Weiss", "target": "Gabi Steele", "value": 1 },
+            { "source": "Gabi Steele", "target": "Mikaela Ergas-Lenett", "value": 1 },
             { "source": "Mikaela Ergas-Lenett", "target": "Marisa Ruiz Asari", "value": 1 },
             { "source": "Marisa Ruiz Asari", "target": "Michael Weinberg", "value": 1 },
-            { "source": "Michael Weinberg", "target": "Neil Oliver", "value": 1 },
+            { "source": "Michael Weinberg", "target": "Lucianne Millan", "value": 1 },
+            { "source": "Lucianne Millan", "target": "Neil Oliver", "value": 1 },
             { "source": "Neil Oliver", "target": "Rhys Berkwitt", "value": 1 },
             { "source": "Rhys Berkwitt", "target": "Bruno Vendruscolo", "value": 1 },
             { "source": "Bruno Vendruscolo", "target": "Samantha Lohier", "value": 1 },
