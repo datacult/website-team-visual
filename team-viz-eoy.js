@@ -60,12 +60,13 @@ const main_div = d3.select('.team-content-wrapper').append('svg').attr('class','
 		}))
 
 		const link = svg_group.append("g")
-        .attr("stroke", "#EA3580")
-        .attr("stroke-opacity", 2)
-        .selectAll("line")
+        .selectAll(".link-line")
         .data(links)
         .join("line")
+		.attr('class','link-line')
         .attr("stroke-width", d => Math.sqrt(d.value))
+        .attr("stroke", "#EA3580")
+        .attr("stroke-opacity", .3)
 
 		var colorScale = ['#F4DEE4','#FBAF84', '#EA3580'];
 		var colorText = ['#000000','#000000', '#000000'];
