@@ -29,6 +29,7 @@ const main_div = d3.select('.team-content-wrapper').append('svg').attr('class','
 			}
 		});
 
+		
 		var links = [
             { "source": "Leah Weiss", "target": "Gabi Steele", "value": 1 },
             { "source": "Gabi Steele", "target": "Mikaela Ergas-Lenett", "value": 1 },
