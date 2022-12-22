@@ -279,7 +279,7 @@ const main_div = d3.select('.team-content-wrapper').append('svg').attr('class','
 			.join('image')
 			.attr("class",'personality_pic')
 			.attr("id",d => "personality_pic"+d.id)
-			.attr('href', 'https://datacult.github.io/website-team-visual/celebration/Confetti.png')
+			.attr('href', 'https://datacult.github.io/website-team-visual/confetti.png')
 			.attr('display','none');
 
 			
