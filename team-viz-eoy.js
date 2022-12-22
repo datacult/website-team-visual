@@ -1,3 +1,4 @@
+//target empty div - needs to match Webflow element
 const main_div = d3.select('.team-content-wrapper').append('svg').attr('class','team'),
 		defs = main_div.append('defs'),
 		svg_group = main_div.append('g').attr('class','svg-g').attr('transform',"translate(80, 200)");
