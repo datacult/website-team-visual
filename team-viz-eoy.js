@@ -6,6 +6,7 @@ const main_div = d3.select('.team-content-wrapper').append('svg').attr('class','
 		//resize for mobile vs desktop
 		if (window.outerWidth > 900){
 			d3.select('.team').attr('viewBox','0 0 950 1100');
+			console.log('desktop')
 			//use these variables to reposition within the viewBox
 			var center = 175, width = 500, adjust = -25;
 		} else {
