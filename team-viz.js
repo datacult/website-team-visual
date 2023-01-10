@@ -10,6 +10,31 @@ const main_div = d3.select('.team-content-wrapper').append('svg').attr('class','
 			var center = 0, width = 1050, adjust = 100;
 		}
 
+		let drag = simulation => {
+
+			function dragstarted(event) {
+				if (!event.active) simulation.alphaTarget(0.3).restart()
+				event.subject.fx = event.subject.x
+				event.subject.fy = event.subject.y
+			}
+	
+			function dragged(event) {
+				event.subject.fx = event.x
+				event.subject.fy = event.y
+			}
+	
+			function dragended(event) {
+				if (!event.active) simulation.alphaTarget(0)
+				event.subject.fx = null;
+				event.subject.fy = null;
+			}
+	
+			return d3.drag()
+				.on("start", dragstarted)
+				.on("drag", dragged)
+				.on("end", dragended)
+		}
+
 		var simulation = d3.forceSimulation()
 			.force('charge', d3.forceManyBody().strength(5))
 			.force('x', d3.forceX().x(function(d) {
@@ -85,6 +110,7 @@ const main_div = d3.select('.team-content-wrapper').append('svg').attr('class','
 				.join('g')
 				.attr("class","headshot")
 				.attr("id",d => "headshot"+d.id)
+				.call(drag(simulation));
 
 			head_group
 				.selectAll('.name')

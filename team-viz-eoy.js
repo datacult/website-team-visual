@@ -63,6 +63,31 @@ const main_div = d3.select('.team-content-wrapper').append('svg').attr('class','
             { "source": "Felix Buchholz", "target": "Grant Wilburn", "value": 1 },
         ]
 
+		let drag = simulation => {
+
+			function dragstarted(event) {
+				if (!event.active) simulation.alphaTarget(0.3).restart()
+				event.subject.fx = event.subject.x
+				event.subject.fy = event.subject.y
+			}
+	
+			function dragged(event) {
+				event.subject.fx = event.x
+				event.subject.fy = event.y
+			}
+	
+			function dragended(event) {
+				if (!event.active) simulation.alphaTarget(0)
+				event.subject.fx = null;
+				event.subject.fy = null;
+			}
+	
+			return d3.drag()
+				.on("start", dragstarted)
+				.on("drag", dragged)
+				.on("end", dragended)
+		}
+
 		//call force simulation
 		simulation.nodes(nodes)
         .force("link", d3.forceLink(links).id(d => data[d.id].Name).distance(10))
@@ -130,6 +155,7 @@ const main_div = d3.select('.team-content-wrapper').append('svg').attr('class','
 				.join('g')
 				.attr("class","headshot")
 				.attr("id",d => "headshot"+d.id)
+				.call(drag(simulation));
 
 			//draw names above rect
 			head_group
