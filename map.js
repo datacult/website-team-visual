@@ -19,7 +19,7 @@ const projection = d3.geoMercator()
 d3.json("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world.geojson").then( function(data) {
 
 
-var countries = ['Canada','USA','Nigeria','Mexico','England','Germany','Brazil']
+var countries = ['Canada','USA','Nigeria','Germany','Portugal']
     // Draw the map
     svg.append("g")
         .selectAll(".country")
